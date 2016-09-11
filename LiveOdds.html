@@ -1,0 +1,48 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+
+table{
+    width: 100%;
+    border-collapse:collapse;
+}
+
+td{
+    width: 20%;
+    text-align: left;
+    border: 1px solid black;
+}
+</style>
+<script>
+$(document).ready(function(){
+
+        $.getJSON("http://fanobet.com/ajax/matchesToBet", function(result){
+		$.each(result.matches, function (i, v) {
+			if ( result.matches[i].id == "") { //Enter Game ID
+				var ODD2 = result.matches[i].odds.s2
+				var ODD1 = result.matches[i].odds.s1
+				var Team1 = result.matches[i].team1.name
+				var Team2 = result.matches[i].team2.name
+				var Team1_img = result.matches[i].team1.icon
+				var Team2_img = result.matches[i].team2.icon
+				var T_icon = result.matches[i].turnamentImg
+				img1 = "<img src='" + "http://fanobet.com" + Team1_img + "'/>";
+				img2 = "<img src='" + "http://fanobet.com" + Team2_img + "'/>";
+				Timg = "<img src='" + "http://fanobet.com" + T_icon + "'/>";
+				$('#game1').append("<tr> <td>" + Timg +" </td> <td>" + img1 + " "  + Team1 + "</td> <td>" + ODD1 + "</td> <td>" + ODD2 + "</td> <td>" + img2 + " " + Team2 + "</td> </tr>");
+				
+			}
+        });
+		
+    });
+});
+</script>
+</head>
+<body>
+
+<table id="game1"> </table>
+
+<div></div>
+</body>
+</html>
